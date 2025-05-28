@@ -1,91 +1,107 @@
 import { Injectable } from '@angular/core';
-import { Credential } from '../models/user/Credential'
-import { User } from '../models/user/User'
-import { Token } from '../models/user/Token'
+import { Credential } from '../models/user/Credential';
+import { User } from '../models/user/User';
+import { Token } from '../models/user/Token';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
+
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  apiURL = 'http://localhost:8080/';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  postLogin(myCredential: Credential): Token {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    }),
+  };
 
-    console.log("email ... " + myCredential.email);
-    console.log("password ... " + myCredential.password);
+  errorMessage = '';
+
+  postLogin(myCredential: Credential) {
+    const body = {
+      username: myCredential.email,
+      password: myCredential.password,
+    };
+
+    console.log(body);
 
     var myToken = new Token();
 
-    // call fake api
-    if ( (myCredential.email == "adsoft@live.com.mx") &&
-	 (myCredential.password == "123"))
-    {
-       myToken.id = "0001";
-       myToken.user = "adsoft";
-       myToken.token = "gcp747844sdjksdkjsdkjds895850vb3";
-    }
-    else {
-       myToken.id = "0";
-       myToken.user = "bad credentials";
-       myToken.token = "";
-    }  
+    return this.http
+      .post(this.apiURL + 'api/auth/signin', body, this.httpOptions)
+      .pipe(catchError(this.handleError));
 
-    return myToken;
+    /*  .subscribe( (data : any)  => {
+        console.log(data);
+        myToken.accessToken = data.accessToken;
+     })
+*/
+
+    // return myToken;
   }
 
-
   createUser(myUser: User): User {
-
-    console.log("email ... " + myUser.email);
-    console.log("password ... " + myUser.password);
-
-    var myNewUser = new User();
-
     // call fake api - create user
     // Success
-    myNewUser.id = 0;
+    // myNewUser.id = 0;
 
-    
-    if ( myNewUser.id != 0 )
-    {
-       console.log("Success " + myNewUser.id);
-       myNewUser.id = 1; // Success
-       myNewUser.email = myUser.email;
-       myNewUser.firstName = myUser.firstName;
-       myNewUser.lastName = myUser.lastName;
-       myNewUser.password = myUser.password;
+    //if (myNewUser.id != 0) {
+    //console.log("Success " + myNewUser.id);
+    //myNewUser.id = 1; // Success
+    //myNewUser.email = myUser.email;
+    // myNewUser.firstName = myUser.firstName;
+    //myNewUser.lastName = myUser.lastName;
+    //myNewUser.password = myUser.password;
+    //} else {
+    //console.log("Error" + myNewUser.id);
 
-    }
-    else {
-       console.log("Error" + myNewUser.id);
+    //myNewUser.id = 0; // Error
+    //}
 
-       myNewUser.id = 0; // Error
-    } 
+    var myNewUser = myUser;
 
-   return myNewUser;
- } 
+    myNewUser.username = myUser.username;
+    myNewUser.email = myUser.email;
+    myNewUser.password = myUser.password;
+    myNewUser.role.push('mod');
+    myNewUser.role.push('users');
 
+    this.http
+      .post('http://localhost:8080/api/auth/signup', myNewUser)
+      .subscribe({
+        next: (res) => console.log('Usuario creado:', res),
+        error: (err) => console.error('Error al crear usuario:', err),
+      });
 
-  resetPassword(email : String, password : String, token : String) : String {
-   // call reset password API
+    return myNewUser;
+  }
 
-   var isResetPassword = 1;
+  resetPassword(email: String, password: String, token: String): String {
+    // call reset password API
 
-   this.destroyToken(token);
+    var isResetPassword = 1;
 
-   return "" + isResetPassword;
-   
+    this.destroyToken(token);
+
+    return '' + isResetPassword;
   }
 
   sendUrlResetPassword(email: String): User {
-
-    console.log("email ... " + email);
+    console.log('email ... ' + email);
 
     var myUser = this.validateUser(email);
 
     if (myUser.id != 0) {
-
       var myUrlReset = this.createUrlReset(myUser.email);
       console.log(myUrlReset);
       var sendEmail = this.sendEmail(myUser.email, myUrlReset);
@@ -93,97 +109,99 @@ export class UserService {
     }
 
     return myUser;
-
   }
 
-  sendEmail(email: String, urlReset: String) : String {
-    
-   var emailSuccess = 0;
+  sendEmail(email: String, urlReset: String): String {
+    var emailSuccess = 0;
 
-   // send email using SMTP (gmail, outlook..)
+    // send email using SMTP (gmail, outlook..)
 
-   // email sent
-   emailSuccess = 1;
-   console.log('sent to :' + email);
-   console.log('url : ' + urlReset);
-   
-   return "" + emailSuccess; 
-  
+    // email sent
+    emailSuccess = 1;
+    console.log('sent to :' + email);
+    console.log('url : ' + urlReset);
+
+    return '' + emailSuccess;
   }
-  createUrlReset(email: String) : String {
-    var myUrlReset = "" +
-        this.createBaseURL() +
-        "/" +   
-        email +  
-        "/" + 
-        this.createTokenReset(email)
+  createUrlReset(email: String): String {
+    var myUrlReset =
+      '' +
+      this.createBaseURL() +
+      '/' +
+      email +
+      '/' +
+      this.createTokenReset(email);
 
-     return myUrlReset;
+    return myUrlReset;
   }
 
-  createBaseURL() : String {
-
-   // call process to create base URL
-    var baseURL = "http://localhost:4200/reset-password";
+  createBaseURL(): String {
+    // call process to create base URL
+    var baseURL = 'http://localhost:4200/reset-password';
 
     return baseURL;
   }
 
-  createTokenReset(email: String) : String {
+  createTokenReset(email: String): String {
     // JWT create a token to encrypt email
-    var SECRET_KEY = "i-love-adsoftsito";
+    var SECRET_KEY = 'i-love-adsoftsito';
 
-    var myToken = "lkjlskiei8093wjdjde9203394"
+    var myToken = 'lkjlskiei8093wjdjde9203394';
 
     return myToken;
   }
 
-
-  validateUser(email: String ) : User {
-
+  validateUser(email: String): User {
     // call fake query api by email
 
     var myUser = new User();
 
     // Success, email valid
-    if ( email == "adsoft@live.com.mx" )
-    {
-       console.log("Success " + myUser.id);
-       myUser.id = 1; // Success
-       myUser.email = email;
-       myUser.firstName = "Adolfo";
-       myUser.lastName = "Centeno";
-       myUser.password = "";
-    }
-    else {
-       console.log("Error" + myUser.id);
+    if (email == 'adsoft@live.com.mx') {
+      console.log('Success ' + myUser.id);
+      myUser.id = 1; // Success
+      myUser.email = email;
+      //  myUser.firstName = "Adolfo";
+      //myUser.lastName = "Centeno";
+      myUser.password = '';
+    } else {
+      console.log('Error' + myUser.id);
 
-       myUser.id = 0; // Error
-    } 
-    
+      myUser.id = 0; // Error
+    }
+
     return myUser;
-  
   }
 
-
-
-  validateToken(email: String, token: String) : String {
-
-    // call api to validate token 
+  validateToken(email: String, token: String): String {
+    // call api to validate token
     // success
     console.log('validating token ... ' + token);
-    
-    var validToken = 1;
-    return ""+validToken;
 
+    var validToken = 1;
+    return '' + validToken;
   }
 
-  destroyToken(token: String) : String {
-
+  destroyToken(token: String): String {
     // call api to destroy token
     var istokenDestroyed = 1;
     console.log('destroying token ... ' + token);
-    return "" + istokenDestroyed;
+    return '' + istokenDestroyed;
   }
 
+  // Error handling
+
+  handleError(error: any) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
 }

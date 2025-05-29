@@ -5,28 +5,19 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
 })
 export class ForgotPasswordComponent {
+  email: String = '';
 
-  email : String = "";
-
-  constructor( private userService: UserService,
-               private router: Router)
-  { 
-  }
+  constructor(private userService: UserService, private router: Router) {}
   resetPassword() {
     console.log(this.email);
-    
-    var myValidUser = this.userService.sendUrlResetPassword(
-        this.email
-       );
 
-    if (myValidUser.id != 0)
-        this.router.navigate(['/']);
+    var myValidUser = this.userService.sendUrlResetPassword(this.email);
 
-     console.log(myValidUser);
+    if (myValidUser.id != 0) this.router.navigate(['/']);
 
-
+    console.log(myValidUser);
   }
 }

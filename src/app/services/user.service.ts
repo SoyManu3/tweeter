@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Credential } from '../models/user/Credential';
 import { User } from '../models/user/User';
 import { Token } from '../models/user/Token';
+import { StorageService } from './storage.service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 

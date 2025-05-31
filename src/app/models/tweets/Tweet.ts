@@ -1,4 +1,4 @@
-export class Tweet{
-id: Number = 0;
-tweet: String = "";
+export class Tweet {
+  id: Number = 0;
+  tweet: String = '';
 }

@@ -1,22 +1,73 @@
-<p>Welcome {{ username }}</p>
-
-<div class="container color-ligth">
+<div class="container color-light">
+  <!-- Formulario para agregar un tweet -->
   <div class="col">
-    <form>
+    <form (ngSubmit)="addTweet()">
       <input
         type="text"
         class="txt"
-        name="item"
-        placeholder="your tweet here..."
-        [(ngModel)]="tweetText"
+        name="nombre"
+        placeholder="Contenido del tweet"
+        [(ngModel)]="nombre"
+        required
       />
-      <input type="submit" class="btn" value="tweet" (click)="addTweet()" />
+      <input
+        type="text"
+        class="txt"
+        name="creador"
+        placeholder="Creador del tweet"
+        [(ngModel)]="creador"
+        required
+      />
+      <input
+        type="number"
+        class="txt"
+        name="fechaDelanzamiento"
+        placeholder="Año de lanzamiento"
+        [(ngModel)]="fechaDelanzamiento"
+        required
+      />
+      <input
+        type="text"
+        class="txt"
+        name="plataformas"
+        placeholder="Plataformas"
+        [(ngModel)]="plataformas"
+        required
+      />
+      <input
+        type="text"
+        class="txt"
+        name="genero"
+        placeholder="Género"
+        [(ngModel)]="genero"
+        required
+      />
+
+      <button type="submit" class="btn">Tweet</button>
     </form>
   </div>
 
+  <!-- Lista de tweets con botones para reaccionar y comentar -->
   <div class="col">
-    <p class="life-container" *ngFor="let tweet of tweets; let i = index">
-      {{ tweet.id }} - {{ tweet.tweet }}
+    <p class="life-container" *ngFor="let tweet of tweets">
+      {{ tweet.id }} - {{ tweet.nombre }} - {{ tweet.creador }} -
+      {{ tweet.fechaDeLanzamiento }} - {{ tweet.plataformas }} -
+      {{ tweet.genero }}
+
+      <!-- Botón para agregar comentario -->
+      <input
+        type="text"
+        [(ngModel)]="commentText[tweet.id]"
+        placeholder="Escribe tu comentario"
+        class="txt"
+      />
+      <button (click)="addComentario(tweet.id)">Enviar comentario</button>
+
+      <!-- Botón de "Like" -->
+      <button (click)="addLike(tweet.id)">👍 Me gusta</button>
+
+      <!-- Botón de "Dislike" -->
+      <button (click)="addDisLike(tweet.id)">👎 No me gusta</button>
     </p>
   </div>
 </div>

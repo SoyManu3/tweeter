@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Tweet } from '../models/tweets/Tweet';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
+import { catchError, throwError } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
-export class TweetService {
+export class InteraccionesService {
   apiURL = 'http://localhost:8080/';
   token = '';
 
@@ -37,29 +36,30 @@ export class TweetService {
     };
   }
 
-  getTweets(): Observable<Tweet> {
-    console.log('tweets: ' + this.apiURL + 'api/game/all');
-    return this.http
-      .get<Tweet>(this.apiURL + 'api/game/all', this.getHttpOptions())
-      .pipe(retry(1), catchError(this.handleError));
-  }
-
-  postTweet(myTweet: any) {
+  postReaction(idVideojuego: number, idReaction: number) {
     const body = {
-      nombre: myTweet.nombre,
-      creador: myTweet.creador,
-      fechaDeLanzamiento: myTweet.fechaDeLanzamiento,
-      plataformas: myTweet.plataformas,
-      genero: myTweet.genero,
+      videojuegoId: idVideojuego,
+      reactionId: idReaction,
     };
     console.log(body);
 
     return this.http
-      .post(this.apiURL + 'api/game/create', body, this.getHttpOptions())
+      .post(this.apiURL + 'api/reactions/create', body, this.getHttpOptions())
       .pipe(catchError(this.handleError));
   }
 
-  // Error handling
+  postComentario(idVideojuego: number, comentario: string) {
+    const body = {
+      videojuegoId: idVideojuego,
+      comentario: comentario,
+    };
+    console.log(body);
+
+    return this.http
+      .post(this.apiURL + 'api/comentario/create', body, this.getHttpOptions())
+      .pipe(catchError(this.handleError));
+  }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

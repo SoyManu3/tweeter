@@ -1,0 +1,41 @@
+/* Fondo de la página de inicio */
+body {
+  background-color: #007bff; /* Un color azul más suave */
+  font-family: "Arial", sans-serif;
+  color: #fff; /* Color de texto blanco */
+  text-align: center;
+  padding: 50px 20px; /* Espaciado alrededor de la página */
+}
+
+/* Estilos para el título */
+h1 {
+  font-size: 48px;
+  color: #fff; /* Título blanco */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Estilo para el texto */
+p {
+  font-size: 20px;
+  color: #b3b3b3; /* Color gris para el texto */
+  margin-top: 10px;
+}
+
+/* Estilo para el enlace de login */
+a {
+  color: #28a745; /* Un verde para el enlace */
+  text-decoration: none;
+  font-size: 18px;
+}
+
+a:hover {
+  text-decoration: underline; /* Subraya el enlace cuando pasa el ratón */
+}
+
+/* Estilos adicionales para el pie de página */
+footer {
+  font-size: 14px;
+  color: #fff;
+  margin-top: 50px;
+}

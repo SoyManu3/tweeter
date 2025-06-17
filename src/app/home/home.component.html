@@ -6,7 +6,7 @@
         type="text"
         class="txt"
         name="nombre"
-        placeholder="Contenido del tweet"
+        placeholder="nombre"
         [(ngModel)]="nombre"
         required
       />
@@ -14,7 +14,7 @@
         type="text"
         class="txt"
         name="creador"
-        placeholder="Creador del tweet"
+        placeholder="Creador"
         [(ngModel)]="creador"
         required
       />
@@ -49,25 +49,55 @@
 
   <!-- Lista de tweets con botones para reaccionar y comentar -->
   <div class="col">
-    <p class="life-container" *ngFor="let tweet of tweets">
-      {{ tweet.id }} - {{ tweet.nombre }} - {{ tweet.creador }} -
-      {{ tweet.fechaDeLanzamiento }} - {{ tweet.plataformas }} -
-      {{ tweet.genero }}
+    <div *ngFor="let tweet of tweets">
+      <div class="life-container">
+        <p>
+          {{ tweet.id }} - {{ tweet.nombre }} - {{ tweet.creador }} -
+          {{ tweet.fechaDeLanzamiento }} - {{ tweet.plataformas }} -
+          {{ tweet.genero }}
+        </p>
 
-      <!-- Botón para agregar comentario -->
-      <input
-        type="text"
-        [(ngModel)]="commentText[tweet.id]"
-        placeholder="Escribe tu comentario"
-        class="txt"
-      />
-      <button (click)="addComentario(tweet.id)">Enviar comentario</button>
+        <!-- Mostrar los comentarios asociados al tweet -->
+        <div *ngIf="comentarios[tweet.id] && comentarios[tweet.id].length > 0">
+          <div *ngFor="let comentario of comentarios[tweet.id]">
+            <p>
+              <strong>{{ comentario.nombreAutor }}:</strong>
+              {{ comentario.comentario }}
+              <span class="fecha-comentario">
+                ({{ comentario.fecha | date : "short" }})
+              </span>
+            </p>
+          </div>
+        </div>
+        <div *ngIf="!comentarios[tweet.id]?.length">
+          <p>No hay comentarios para este tweet.</p>
+        </div>
 
-      <!-- Botón de "Like" -->
-      <button (click)="addLike(tweet.id)">👍 Me gusta</button>
+        <!-- Campo para agregar un comentario -->
+        <input
+          type="text"
+          [(ngModel)]="commentText[tweet.id]"
+          placeholder="Escribe tu comentario"
+          class="txt"
+        />
+        <button (click)="addComentario(tweet.id)">Enviar comentario</button>
+        <button (click)="countReactions(tweet.id)">prueba</button>
 
-      <!-- Botón de "Dislike" -->
-      <button (click)="addDisLike(tweet.id)">👎 No me gusta</button>
-    </p>
+        <p>
+          Likes: {{ reactionCounts[tweet.id].likes || 0 }}
+          <!-- Muestra 0 si el valor es undefined o null -->
+        </p>
+        <p>
+          Dislikes: {{ reactionCounts[tweet.id].dislikes || 0 }}
+          <!-- Muestra 0 si el valor es undefined o null -->
+        </p>
+
+        <!-- Botón para agregar "Like" -->
+        <button (click)="addLike(tweet.id)">👍 Me gusta</button>
+
+        <!-- Botón para agregar "Dislike" -->
+        <button (click)="addDisLike(tweet.id)">👎 No me gusta</button>
+      </div>
+    </div>
   </div>
 </div>

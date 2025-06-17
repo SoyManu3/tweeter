@@ -17,19 +17,16 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  email: String = 'adsoft@live.com.mx';
-  password: String = '123';
+  email: String = '';
+  password: String = '';
   myLogin = new Token();
 
   callLogin() {
-    //alert("login...");
-
     var myCredential = new Credential();
 
     myCredential.email = this.email;
     myCredential.password = this.password;
 
-    //this.myLogin =
     this.userService.postLogin(myCredential).subscribe(
       (data: any) => {
         console.log('user logged: ', JSON.stringify(data));
@@ -44,15 +41,27 @@ export class LoginComponent {
         this.router.navigate(['/home']);
       },
       (error) => {
-        console.log('there was an error sending the query', error);
-        myCredential.email = '';
-        myCredential.password = '';
-        alert(error);
+        console.error('Error de inicio de sesión: ', error);
+
+        // Muestra un mensaje de error personalizado dependiendo de la respuesta
+        if (error.status === 400) {
+          alert(
+            'Credenciales incorrectas. Por favor, verifica tu correo y contraseña.'
+          );
+        } else if (error.status === 500) {
+          alert(
+            'Error en el servidor. Por favor, intenta nuevamente más tarde.'
+          );
+        } else {
+          alert(
+            'Hubo un error al intentar iniciar sesión. Inténtalo de nuevo.'
+          );
+        }
+
+        // Limpiar campos después de un error
+        this.email = '';
+        this.password = '';
       }
     );
-
-    if (this.myLogin.accessToken != '') this.router.navigate(['/home']);
-
-    console.log(this.myLogin);
   }
 }

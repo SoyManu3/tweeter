@@ -20,7 +20,7 @@ export class NewUserComponent {
     this.myNewUser = this.userService.createUser(this.myPayloadUser);
 
     console.log(this.myNewUser);
-
+    this.router.navigate(['/login']);
     // if (this.myNewUser.id != 0) this.router.navigate(["/login"]);
   }
 }

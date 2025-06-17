@@ -1,25 +1,79 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,700");
 
 body {
-   background : #2E9ce6;
-   padding: 3em;
-   font-family: 'Raleway', 'Arial';
-   color: #fff;
+  background: #2e9ce6; /* Azul brillante */
+  padding: 4em 2em; /* Añadido un poco más de espaciado */
+  font-family: "Raleway", Arial, sans-serif; /* Fuente más moderna */
+  color: #fff; /* Texto blanco para contrastar con el fondo */
+  text-align: center; /* Alineación centrada de todos los elementos */
 }
 
+/* Estilos para los títulos */
+h1 {
+  font-size: 48px; /* Tamaño de fuente grande */
+  font-weight: 700; /* Peso de fuente más grueso */
+  color: #fff; /* Color blanco para que contraste bien */
+  margin-bottom: 30px; /* Espacio por debajo del título */
+}
+
+h2 {
+  font-size: 24px; /* Tamaño de fuente para el subtítulo */
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Estilo para el enlace de login */
+a {
+  color: #0f0; /* Verde brillante para el enlace */
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline; /* Subraya el enlace cuando pasa el cursor */
+}
+
+/* Ajustes para el pie de página o texto adicional */
+footer {
+  font-size: 14px;
+  color: #fff;
+  margin-top: 50px; /* Separación del contenido */
+}
+
+/* Estilos para la lista de navegación */
 ul {
-   list-style-type: none;
-   margin: 0 0 2em 0;
-   padding: 0;
+  list-style-type: none; /* Sin puntos de lista */
+  margin: 0 0 2em 0;
+  padding: 0;
 }
 
 ul li {
-   display: inline;
-   margin-right: 30px;
+  display: inline; /* Los elementos de la lista estarán en línea */
+  margin-right: 30px; /* Espaciado entre los elementos */
 }
 
-a {
-   color: #0f0;
-   text-decoration: none;
+ul li a {
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
 }
 
+ul li a:hover {
+  color: #0f0; /* Verde para los enlaces al pasar el ratón */
+  text-decoration: underline;
+}
+
+/* Estilo del contenedor principal */
+.container {
+  max-width: 800px;
+  margin: 0 auto; /* Centrado de la caja */
+  padding: 20px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Fondo blanco con algo de transparencia */
+  border-radius: 12px; /* Bordes redondeados */
+}

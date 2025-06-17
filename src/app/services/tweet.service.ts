@@ -22,27 +22,40 @@ export class TweetService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Authorization: 'Bearer ' + this.token,
+      Authorization: 'Bearer ' + this.token, // Asegúrate de que este valor esté correcto
     }),
   };
   errorMessage = '';
 
+  getHttpOptions() {
+    const token = this.storageService.getSession('token');
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      }),
+    };
+  }
+
   getTweets(): Observable<Tweet> {
-    console.log('tweets: ' + this.apiURL + 'api/tweets/all');
+    console.log('tweets: ' + this.apiURL + 'api/game/all');
     return this.http
-      .get<Tweet>(this.apiURL + 'api/tweets/all', this.httpOptions)
+      .get<Tweet>(this.apiURL + 'api/game/all', this.getHttpOptions())
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  postTweet(myTweet: String) {
+  postTweet(myTweet: any) {
     const body = {
-      tweet: myTweet,
+      nombre: myTweet.nombre,
+      creador: myTweet.creador,
+      fechaDeLanzamiento: myTweet.fechaDeLanzamiento,
+      plataformas: myTweet.plataformas,
+      genero: myTweet.genero,
     };
     console.log(body);
 
     return this.http
-      .post(this.apiURL + 'api/tweets/create', body, this.httpOptions)
+      .post(this.apiURL + 'api/game/create', body, this.getHttpOptions())
       .pipe(catchError(this.handleError));
   }
 

@@ -8,7 +8,7 @@ import { StorageService } from './storage.service';
   providedIn: 'root',
 })
 export class TweetService {
-  apiURL = 'http://localhost:8080/';
+  apiURL = 'https://game-spring.onrender.com/';
   token = '';
 
   constructor(

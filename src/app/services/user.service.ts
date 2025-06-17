@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserService {
-  apiURL = 'http://localhost:8080/';
+  apiURL = 'https://game-spring.onrender.com/';
 
   constructor(private http: HttpClient) {}
 
@@ -78,7 +78,7 @@ export class UserService {
     myNewUser.role.push('users');
 
     this.http
-      .post('http://localhost:8080/api/auth/signup', myNewUser)
+      .post('https://game-spring.onrender.com/api/auth/signup', myNewUser)
       .subscribe({
         next: (res) => console.log('Usuario creado:', res),
         error: (err) => console.error('Error al crear usuario:', err),

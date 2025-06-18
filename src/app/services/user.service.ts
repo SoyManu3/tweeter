@@ -77,12 +77,10 @@ export class UserService {
     myNewUser.role.push('mod');
     myNewUser.role.push('users');
 
-    this.http
-      .post('https://game-spring.onrender.com/api/auth/signup', myNewUser)
-      .subscribe({
-        next: (res) => console.log('Usuario creado:', res),
-        error: (err) => console.error('Error al crear usuario:', err),
-      });
+    this.http.post(this.apiURL + 'api/auth/signup', myNewUser).subscribe({
+      next: (res) => console.log('Usuario creado:', res),
+      error: (err) => console.error('Error al crear usuario:', err),
+    });
 
     return myNewUser;
   }

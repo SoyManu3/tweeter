@@ -1,143 +1,182 @@
-/* Estilos generales del contenedor */
+/* Estilos generales */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7fc; /* Fondo claro */
+  color: #333; /* Color de texto principal */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .container {
-  max-width: 900px;
-  margin: 30px auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.color-light {
-  background-color: #f9f9f9;
-}
-
-/* Título */
-h1 {
-  text-align: center;
-  font-family: "Arial", sans-serif;
-  color: #333;
-  font-size: 28px;
+.col {
+  width: 100%;
   margin-bottom: 30px;
 }
 
-/* Formulario para agregar un tweet */
-.col {
-  margin-bottom: 25px;
+/* Formulario */
+form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 15px;
 }
 
 .txt {
   width: 100%;
-  padding: 15px;
-  margin: 15px 0;
-  border: 1px solid #ddd;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
-  box-sizing: border-box;
-  background-color: #fafafa;
+  color: #333;
+  background-color: #f9f9f9;
 }
 
-button.btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: #fff;
+.txt:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #f0f8ff;
+}
+
+button {
+  padding: 12px 20px;
   border: none;
   border-radius: 8px;
-  font-size: 18px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-button.btn:hover {
+button:hover {
   background-color: #0056b3;
 }
 
-/* Estilos de los tweets */
+/* Lista de tweets */
 .life-container {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
-  margin-bottom: 25px;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .life-container p {
-  font-family: "Arial", sans-serif;
   font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
   color: #555;
-  margin: 10px 0;
 }
 
-.life-container span {
-  font-size: 14px;
-  color: #888;
-}
-
-/* Estilos para los comentarios */
-.fecha-comentario {
-  font-size: 13px;
-  color: #888;
-  margin-left: 10px;
-}
-
-strong {
+.life-container p strong {
   font-weight: bold;
-  color: #333;
 }
 
-button {
-  padding: 10px 20px;
+/* Estilos para comentarios */
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment-container {
   background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 5px solid #007bff;
+}
+
+.comment-container p {
   font-size: 14px;
+  margin: 5px 0;
+}
+
+.comment-container .fecha-comentario {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.no-comments {
+  font-size: 14px;
+  color: #888;
+}
+
+/* Estilo de la sección de comentarios */
+.comment-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.comment-section input {
+  width: 80%;
+  padding: 10px;
   margin-right: 10px;
-}
-
-button:hover {
-  background-color: #ddd;
-}
-
-/* Estilos para el campo de comentarios */
-.comment-input {
-  width: 90%;
-  display: inline-block;
-  padding: 12px;
-  margin: 15px 0;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  font-size: 16px;
 }
 
-.comment-input:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-/* Hacer los tweets más anchos y con bordes redondeados */
-.life-container {
-  max-width: 100%;
-  margin: 15px 0;
-  border-radius: 12px;
-}
-
-.comment-text {
+.comment-section button {
+  padding: 10px 15px;
   font-size: 14px;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-/* Botones de acción (me gusta / no me gusta) */
-button {
-  padding: 10px 20px;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
-  margin-right: 10px;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #ddd;
+.comment-section button:hover {
+  background-color: #218838;
+}
+
+/* Reacciones */
+.reactions {
+  margin-top: 20px;
+}
+
+.reactions button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: color 0.3s ease;
+}
+
+.reactions button:hover {
+  color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .life-container {
+    padding: 15px;
+  }
+
+  .txt {
+    padding: 10px;
+  }
+
+  .comment-section input {
+    width: 70%;
+  }
+
+  .comment-section button {
+    width: 25%;
+  }
 }

@@ -5,4 +5,5 @@ export class Tweet {
   fechaDeLanzamiento: number = 0;
   plataformas: String = '';
   genero: String = '';
+  postedBy: String = '';
 }

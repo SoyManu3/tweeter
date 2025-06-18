@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,700");
 
+/* Estilos generales */
 body {
   background: #2e9ce6; /* Azul brillante */
   padding: 4em 2em; /* Añadido un poco más de espaciado */
   font-family: "Raleway", Arial, sans-serif; /* Fuente más moderna */
   color: #fff; /* Texto blanco para contrastar con el fondo */
-  text-align: center; /* Alineación centrada de todos los elementos */
+  text-align: left; /* Alineación del texto a la izquierda */
+  margin: 0;
 }
 
 /* Estilos para los títulos */
@@ -76,4 +78,140 @@ ul li a:hover {
     0.8
   ); /* Fondo blanco con algo de transparencia */
   border-radius: 12px; /* Bordes redondeados */
+}
+
+/* Estilos de los tweets y comentarios */
+.life-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-align: left; /* Alineación del texto a la izquierda */
+}
+
+.life-container p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  color: #555;
+}
+
+.life-container p strong {
+  font-weight: bold;
+}
+
+.tweet-title {
+  font-size: 24px; /* Nombre del juego más grande */
+  color: #007bff; /* Color destacado */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tweet-creator {
+  color: #007bff; /* Color para quien lo posteó */
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+hr.divider {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+/* Estilos para los comentarios */
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment-container {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 5px solid #007bff;
+}
+
+.comment-container p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.comment-container .fecha-comentario {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.no-comments {
+  font-size: 14px;
+  color: #888;
+}
+
+.comment-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.comment-section input {
+  width: 80%;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.comment-section button {
+  padding: 10px 15px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.comment-section button:hover {
+  background-color: #218838;
+}
+
+/* Reacciones */
+.reactions {
+  margin-top: 20px;
+}
+
+.reactions button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: color 0.3s ease;
+}
+
+.reactions button:hover {
+  color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .life-container {
+    padding: 15px;
+  }
+
+  .txt {
+    padding: 10px;
+  }
+
+  .comment-section input {
+    width: 70%;
+  }
+
+  .comment-section button {
+    width: 25%;
+  }
 }

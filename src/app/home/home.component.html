@@ -2,46 +2,56 @@
   <!-- Formulario para agregar un tweet -->
   <div class="col">
     <form (ngSubmit)="addTweet()">
-      <input
-        type="text"
-        class="txt"
-        name="nombre"
-        placeholder="nombre"
-        [(ngModel)]="nombre"
-        required
-      />
-      <input
-        type="text"
-        class="txt"
-        name="creador"
-        placeholder="Creador"
-        [(ngModel)]="creador"
-        required
-      />
-      <input
-        type="number"
-        class="txt"
-        name="fechaDelanzamiento"
-        placeholder="Año de lanzamiento"
-        [(ngModel)]="fechaDelanzamiento"
-        required
-      />
-      <input
-        type="text"
-        class="txt"
-        name="plataformas"
-        placeholder="Plataformas"
-        [(ngModel)]="plataformas"
-        required
-      />
-      <input
-        type="text"
-        class="txt"
-        name="genero"
-        placeholder="Género"
-        [(ngModel)]="genero"
-        required
-      />
+      <div class="form-group">
+        <input
+          type="text"
+          class="txt"
+          name="nombre"
+          placeholder="Nombre"
+          [(ngModel)]="nombre"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="txt"
+          name="creador"
+          placeholder="Creador"
+          [(ngModel)]="creador"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="number"
+          class="txt"
+          name="fechaDelanzamiento"
+          placeholder="Año de lanzamiento"
+          [(ngModel)]="fechaDelanzamiento"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="txt"
+          name="plataformas"
+          placeholder="Plataformas"
+          [(ngModel)]="plataformas"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="txt"
+          name="genero"
+          placeholder="Género"
+          [(ngModel)]="genero"
+          required
+        />
+      </div>
 
       <button type="submit" class="btn">Tweet</button>
     </form>
@@ -52,14 +62,29 @@
     <div *ngFor="let tweet of tweets">
       <div class="life-container">
         <p>
-          {{ tweet.id }} - {{ tweet.nombre }} - {{ tweet.creador }} -
-          {{ tweet.fechaDeLanzamiento }} - {{ tweet.plataformas }} -
-          {{ tweet.genero }}
+          <strong class="tweet-title">{{ tweet.nombre }}</strong
+          ><br />
+          <strong class="tweet-creator">{{ tweet.postedBy }}</strong
+          ><br />
+          <strong>Género:</strong> {{ tweet.genero }}<br />
+          <strong>Año de lanzamiento:</strong> {{ tweet.fechaDeLanzamiento
+          }}<br />
+          <strong>Plataformas:</strong> {{ tweet.plataformas }}<br />
+          <strong>Creador:</strong> {{ tweet.creador }}<br />
         </p>
 
+        <!-- Línea divisoria -->
+        <hr class="divider" />
+
         <!-- Mostrar los comentarios asociados al tweet -->
-        <div *ngIf="comentarios[tweet.id] && comentarios[tweet.id].length > 0">
-          <div *ngFor="let comentario of comentarios[tweet.id]">
+        <div
+          *ngIf="comentarios[tweet.id] && comentarios[tweet.id].length > 0"
+          class="comments-section"
+        >
+          <div
+            *ngFor="let comentario of comentarios[tweet.id]"
+            class="comment-container"
+          >
             <p>
               <strong>{{ comentario.nombreAutor }}:</strong>
               {{ comentario.comentario }}
@@ -69,34 +94,37 @@
             </p>
           </div>
         </div>
+
         <div *ngIf="!comentarios[tweet.id]?.length">
-          <p>No hay comentarios para este tweet.</p>
+          <p class="no-comments">No hay comentarios para este tweet.</p>
         </div>
 
         <!-- Campo para agregar un comentario -->
-        <input
-          type="text"
-          [(ngModel)]="commentText[tweet.id]"
-          placeholder="Escribe tu comentario"
-          class="txt"
-        />
-        <button (click)="addComentario(tweet.id)">Enviar comentario</button>
-        <button (click)="countReactions(tweet.id)">prueba</button>
+        <div class="comment-section">
+          <input
+            type="text"
+            [(ngModel)]="commentText[tweet.id]"
+            placeholder="Escribe tu comentario"
+            class="txt"
+          />
+          <button (click)="addComentario(tweet.id)">Enviar comentario</button>
+        </div>
 
-        <p>
-          Likes: {{ reactionCounts[tweet.id].likes || 0 }}
-          <!-- Muestra 0 si el valor es undefined o null -->
-        </p>
-        <p>
-          Dislikes: {{ reactionCounts[tweet.id].dislikes || 0 }}
-          <!-- Muestra 0 si el valor es undefined o null -->
-        </p>
+        <div class="reactions">
+          <p>
+            <strong>Likes:</strong> {{ reactionCounts[tweet.id].likes || 0 }}
+          </p>
+          <p>
+            <strong>Dislikes:</strong>
+            {{ reactionCounts[tweet.id].dislikes || 0 }}
+          </p>
 
-        <!-- Botón para agregar "Like" -->
-        <button (click)="addLike(tweet.id)">👍 Me gusta</button>
+          <!-- Botón para agregar "Like" -->
+          <button (click)="addLike(tweet.id)">👍 Me gusta</button>
 
-        <!-- Botón para agregar "Dislike" -->
-        <button (click)="addDisLike(tweet.id)">👎 No me gusta</button>
+          <!-- Botón para agregar "Dislike" -->
+          <button (click)="addDisLike(tweet.id)">👎 No me gusta</button>
+        </div>
       </div>
     </div>
   </div>

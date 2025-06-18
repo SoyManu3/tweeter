@@ -8,7 +8,7 @@ import { StorageService } from './storage.service';
   providedIn: 'root',
 })
 export class TweetService {
-  apiURL = 'https://game-spring.onrender.com/';
+  apiURL = 'https://game-spring-img.onrender.com/';
   token = '';
 
   constructor(
@@ -51,6 +51,8 @@ export class TweetService {
       fechaDeLanzamiento: myTweet.fechaDeLanzamiento,
       plataformas: myTweet.plataformas,
       genero: myTweet.genero,
+      url: myTweet.url,
+      img: myTweet.img,
     };
     console.log(body);
 

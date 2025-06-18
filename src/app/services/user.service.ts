@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserService {
-  apiURL = 'https://game-spring.onrender.com/';
+  apiURL = 'https://game-spring-img.onrender.com/';
 
   constructor(private http: HttpClient) {}
 

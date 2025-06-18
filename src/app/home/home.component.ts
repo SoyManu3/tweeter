@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   fechaDelanzamiento: number = 0; // Año de lanzamiento del juego
   plataformas: string = ''; // Plataformas
   genero: string = ''; // Género
+  url: string = 'sin url'; // URL del tweet
+  img: string = ''; // Imagen del tweet
   tweets: Tweet[] = []; // Lista de tweets
   commentText: { [key: number]: string } = {}; // Comentarios para cada tweet
   comentarios: { [key: number]: ComentariosTweet[] } = {}; // Comentarios por gameId
@@ -73,6 +75,8 @@ export class HomeComponent implements OnInit {
       fechaDeLanzamiento: this.fechaDelanzamiento,
       plataformas: this.plataformas,
       genero: this.genero,
+      url: this.url,
+      img: this.img,
     };
 
     console.log('Enviando tweet:', body);

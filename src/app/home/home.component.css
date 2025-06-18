@@ -85,6 +85,26 @@ button:hover {
   font-weight: bold;
 }
 
+.tweet-title {
+  font-size: 24px; /* Nombre del juego más grande */
+  color: #007bff; /* Color destacado */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tweet-creator {
+  color: #007bff; /* Color para quien lo posteó */
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Línea divisoria entre el post y los comentarios */
+hr.divider {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
 /* Estilos para comentarios */
 .comments-section {
   margin-top: 20px;
@@ -158,7 +178,14 @@ button:hover {
   margin-right: 15px;
   transition: color 0.3s ease;
 }
-
+.tweet-image {
+  max-width: 200px; /* Tamaño máximo de 200px de ancho */
+  height: auto; /* Mantiene la proporción de la imagen */
+  border-radius: 8px; /* Bordes redondeados */
+  margin-top: 15px;
+  margin-bottom: 15px;
+  object-fit: cover; /* Asegura que la imagen se recorte si es más grande que el contenedor */
+}
 .reactions button:hover {
   color: #0056b3;
 }

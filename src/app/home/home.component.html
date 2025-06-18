@@ -53,7 +53,17 @@
         />
       </div>
 
-      <button type="submit" class="btn">Tweet</button>
+      <div class="form-group">
+        <input
+          type="text"
+          class="txt"
+          name="img"
+          placeholder="URL de Imagen "
+          [(ngModel)]="img"
+        />
+      </div>
+
+      <button type="submit" class="btn">Postear</button>
     </form>
   </div>
 
@@ -64,7 +74,8 @@
         <p>
           <strong class="tweet-title">{{ tweet.nombre }}</strong
           ><br />
-          <strong class="tweet-creator">{{ tweet.postedBy }}</strong
+          <strong class="tweet-creator"
+            >Posteado por: {{ tweet.postedBy }}</strong
           ><br />
           <strong>Género:</strong> {{ tweet.genero }}<br />
           <strong>Año de lanzamiento:</strong> {{ tweet.fechaDeLanzamiento
@@ -72,6 +83,11 @@
           <strong>Plataformas:</strong> {{ tweet.plataformas }}<br />
           <strong>Creador:</strong> {{ tweet.creador }}<br />
         </p>
+
+        <!-- Mostrar imagen si está disponible -->
+        <div *ngIf="tweet.img">
+          <img [src]="tweet.img" alt="Imagen del tweet" class="tweet-image" />
+        </div>
 
         <!-- Línea divisoria -->
         <hr class="divider" />
@@ -96,7 +112,7 @@
         </div>
 
         <div *ngIf="!comentarios[tweet.id]?.length">
-          <p class="no-comments">No hay comentarios para este tweet.</p>
+          <p class="no-comments">No hay comentarios para este post.</p>
         </div>
 
         <!-- Campo para agregar un comentario -->

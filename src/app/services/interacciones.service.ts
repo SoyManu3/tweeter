@@ -8,7 +8,7 @@ import { ComentariosTweet } from '../models/ComentariosPublicacion/ComentariosTw
   providedIn: 'root',
 })
 export class InteraccionesService {
-  apiURL = 'https://game-spring.onrender.com/';
+  apiURL = 'https://game-spring-img.onrender.com/';
   token = '';
 
   constructor(
